@@ -22,7 +22,7 @@ function App()
 {
 
   // set states
-  let [state, setState] = useState({loading: false, display: [], downloadable: false, objFile: false})
+  let [state, setState] = useState({loading: false, display: [], downloadable: false, objFile: false, selectedFile: ''})
 
   //submit function
   function submitCsv ()
@@ -85,6 +85,13 @@ function App()
   }
 
 
+  // handle file change - control the file input
+  function onFileChange (event)
+  {
+    console.log('event file change')
+    setState({...state, selectedFile: event.target.value})
+  }
+
 
   
   // clears the display state at the beginning on load
@@ -92,7 +99,8 @@ function App()
    * adding an empty array on the second parameter ensures this portion runs at least once
    */
   useEffect(()=> { 
-    setState({...state, display: [], downloadable: false})
+    setState({...state, display: [], downloadable: false, selectedFile: ''})
+    console.log('current state: ', state)
   }, [])
   
 
@@ -119,6 +127,8 @@ function App()
                 id="csvFile"
                 name="file"
                 type="file"
+                onChange={onFileChange}
+                value={state.selectedFile}
               />
               <FormText>
                 Select CSV File.
@@ -132,7 +142,7 @@ function App()
               state.objFile != false ?
               <div>
               <br/>
-              <a href={'https://upload-csv-app.s3.ca-central-1.amazonaws.com/'+state.objFile}>Uploaded to s3</a>
+              <a href={'https://upload-csv-app.s3.ca-central-1.amazonaws.com/'+state.objFile}>Uploaded file in s3</a>
               </div> :
               ''
             }
