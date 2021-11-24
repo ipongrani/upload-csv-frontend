@@ -1,6 +1,21 @@
-# Getting Started with Create React App
+# Upload CSV and parse to JSON Frontend
+
+`This is a minimal setup of a react frontend using Reacstrap and Bootstrap components for interfacing the CSV Upload serverless endpoints.`
+
+
+## Requirements:
+    Reactstrap
+    Bootstrap
+    Axios
+
+
+`Clone the project and install the dependencies.`
+
+
+### Guide for Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 
 ## Available Scripts
 
