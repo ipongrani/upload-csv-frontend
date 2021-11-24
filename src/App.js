@@ -22,7 +22,7 @@ function App()
 {
 
   // set states
-  let [state, setState] = useState({loading: false, display: [], downloadable: false})
+  let [state, setState] = useState({loading: false, display: [], downloadable: false, objFile: false})
 
   //submit function
   function submitCsv ()
@@ -45,12 +45,12 @@ function App()
     .then(response  => {
    
       // setback loading to false
-      setState({...state, loading: false, display: response.data, downloadable: true})
+      setState({...state, loading: false, display: response.data.resultSet, downloadable: true, objFile: response.data.objLink})
     })
     .catch(err =>{
       console.log('error on request: ', err)
       // catch error and display message
-      setState({...state, loading: false, display: ['Please attach a CSV File'], downloadable: false})
+      setState({...state, loading: false, display: ['Please attach a CSV File'], downloadable: false, objFile: false})
     })
   }
 
@@ -79,7 +79,7 @@ function App()
     else
     {
       // handle error if no data available
-      setState({...state, display: ['Nothing to download.']})
+      setState({...state, display: ['Nothing to download.'], objFile: false})
     }
   
   }
@@ -127,6 +127,15 @@ function App()
             <Button onClick={submitCsv}>
               Submit
             </Button>
+            {
+              // if the filename of the uploaded file is present, create a link to it to s3
+              state.objFile != false ?
+              <div>
+              <br/>
+              <a href={'https://upload-csv-app.s3.ca-central-1.amazonaws.com/'+state.objFile}>Uploaded to s3</a>
+              </div> :
+              ''
+            }
           </CardBody>
         </Card>
       </div>

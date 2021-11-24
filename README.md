@@ -12,6 +12,13 @@
 `Clone the project and install the dependencies.`
 
 
+*`For deplpoying to S3 bucket, make sure to run YARN RUN BUILD and use the files inside the BUILD directory`*
+ - you can then setup the S3 to host static website and simply upload all the files within the BUILD directory to the S3 BUCKET.
+ The site will be accessible via the OBJECT URL of the file located in the object overview.
+
+
+
+
 ### Guide for Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
